@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FEATURES } from './features';
 
 const ThankYouPage = () => {
-    const [selectedFeature, setSelectedFeature] = useState('');
+    const [selectedFeatures, setSelectedFeatures] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -65,7 +65,7 @@ const ThankYouPage = () => {
                         className="bg-[#F0F9FF] border border-blue-100 rounded-xl p-8 shadow-sm"
                     >
                         <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-                            Which feature interests you most?
+                            Which of these features interests you?
                         </h2>
                         <p className="text-gray-600 text-center mb-8">
                             Help us understand what matters most to you
@@ -85,27 +85,34 @@ const ThankYouPage = () => {
                                 {FEATURES.map((feature) => (
                                     <label
                                         key={feature.id}
-                                        className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${selectedFeature === feature.id
+                                        className={`cursor-pointer border-2 rounded-lg p-4 transition-all ${selectedFeatures.includes(feature.id)
                                             ? 'border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
                                             : 'border-gray-200 bg-white hover:border-gray-300'
                                             }`}
                                     >
                                         <input
-                                            type="radio"
+                                            type="checkbox"
                                             name="feature"
                                             value={feature.id}
-                                            checked={selectedFeature === feature.id}
-                                            onChange={(e) => setSelectedFeature(e.target.value)}
+                                            checked={selectedFeatures.includes(feature.id)}
+                                            onChange={(e) => {
+                                                if (e.target.checked) {
+                                                    setSelectedFeatures([...selectedFeatures, feature.id]);
+                                                } else {
+                                                    setSelectedFeatures(selectedFeatures.filter(id => id !== feature.id));
+                                                }
+                                            }}
                                             className="sr-only"
-                                            required
                                         />
                                         <div className="flex items-start gap-3">
-                                            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${selectedFeature === feature.id
+                                            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${selectedFeatures.includes(feature.id)
                                                 ? 'border-black bg-[#D9F827]'
                                                 : 'border-gray-300'
                                                 }`}>
-                                                {selectedFeature === feature.id && (
-                                                    <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                {selectedFeatures.includes(feature.id) && (
+                                                    <svg className="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                    </svg>
                                                 )}
                                             </div>
                                             <div>
@@ -123,7 +130,7 @@ const ThankYouPage = () => {
 
                             <button
                                 type="submit"
-                                disabled={!selectedFeature || isSubmitting}
+                                disabled={selectedFeatures.length === 0 || isSubmitting}
                                 className="w-full bg-black text-white font-medium px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {isSubmitting ? 'Submitting...' : 'Submit'}
