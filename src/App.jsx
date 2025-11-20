@@ -1,10 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, ShieldCheck, Zap, DollarSign } from 'lucide-react';
+import { useNavigate, Routes, Route } from 'react-router-dom';
+import ThankYouPage from './ThankYouPage';
+import { FEATURES } from './features';
 
 // --- Components ---
 
 const EmailCapture = ({ className = '' }) => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,8 +23,7 @@ const EmailCapture = ({ className = '' }) => {
       });
 
       if (response.ok) {
-        alert('Thanks! We\'ll be in touch soon.');
-        form.reset();
+        navigate('/thank-you');
       } else {
         alert('Something went wrong. Please try again.');
       }
@@ -282,7 +286,7 @@ const FeatureBlock = ({ title, copy, graphicType }) => {
 
 // --- Main Page ---
 
-export default function LandingPage() {
+function LandingPage() {
   return (
     <div className="min-h-screen font-sans text-gray-900 bg-white selection:bg-[#D9F827] selection:text-black">
 
@@ -335,33 +339,14 @@ export default function LandingPage() {
       <section className="bg-[#F0FDF4] py-24 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
-            {/* Prop 1 */}
-            <FeatureBlock
-              graphicType="sales"
-              title="Your website is your newest sales engine"
-              copy="Stop relying on expensive Thumbtack and marketplace leads. Albus gives your website an SEO tune-up so the traffic comes rolling in automatically, and lets customers book with a simple form. Collect payments on the spot -- deposit or in full."
-            />
-
-            {/* Prop 2 */}
-            <FeatureBlock
-              graphicType="payment"
-              title="Automate payment follow-ups"
-              copy="Say goodbye to chasing customers for their payments. Albus will flag the customers with outstanding payments and automatically send professional, personalized reminders."
-            />
-
-            {/* Prop 3 */}
-            <FeatureBlock
-              graphicType="csr"
-              title="Never miss a booking with a 24/7 AI CSR"
-              copy="Albus AI assistants answer every call, even after hours and weekends. They score and prioritize your leads with Zillow lookups and licensing checks. So you can have lunch or dinner in peace without worrying about dropped revenue."
-            />
-
-            {/* Prop 4 */}
-            <FeatureBlock
-              graphicType="financing"
-              title="Offer customers financing"
-              copy="Close more jobs and increase ticket sizes with flexible financing with no additional fees. Customers get an instant decision."
-            />
+            {FEATURES.map((feature) => (
+              <FeatureBlock
+                key={feature.id}
+                graphicType={feature.graphicType}
+                title={feature.title}
+                copy={feature.copy}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -388,5 +373,16 @@ export default function LandingPage() {
       </footer>
 
     </div>
+  );
+}
+
+// --- Router Setup ---
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/thank-you" element={<ThankYouPage />} />
+    </Routes>
   );
 }
