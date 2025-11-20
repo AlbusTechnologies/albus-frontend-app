@@ -5,10 +5,43 @@ import { Phone, ShieldCheck, Zap, DollarSign } from 'lucide-react';
 // --- Components ---
 
 const EmailCapture = ({ className = '' }) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (response.ok) {
+        alert('Thanks! We\'ll be in touch soon.');
+        form.reset();
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again.');
+    }
+  };
+
   return (
-    <form className={`flex w-full max-w-md border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm focus-within:ring-2 focus-within:ring-black transition-all ${className}`} onSubmit={(e) => e.preventDefault()}>
+    <form
+      name="email-signup"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      className={`flex w-full max-w-md border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm focus-within:ring-2 focus-within:ring-black transition-all ${className}`}
+      onSubmit={handleSubmit}
+    >
+      <input type="hidden" name="form-name" value="email-signup" />
+      <input type="hidden" name="bot-field" />
       <input
         type="email"
+        name="email"
         placeholder="What's your email?"
         className="flex-grow px-4 py-2 outline-none text-gray-800 placeholder-gray-400"
         required
