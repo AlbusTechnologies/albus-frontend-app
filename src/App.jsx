@@ -298,7 +298,7 @@ function LandingPage() {
             <div className="w-8 h-8 bg-black rounded-md flex items-center justify-center">
               <span className="text-white font-bold text-lg">A</span>
             </div>
-            <span className="font-semibold text-xl tracking-tight">Albus Technologies</span>
+            <span className="font-semibold text-xl tracking-tight">Albus</span>
           </div>
 
           <div className="hidden md:block w-[420px]">
