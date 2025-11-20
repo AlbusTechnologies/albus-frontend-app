@@ -11,11 +11,19 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
-  <!-- Hidden form for Netlify build-time detection -->
+  <!-- Hidden forms for Netlify build-time detection -->
   <form name="email-signup" netlify netlify-honeypot="bot-field" hidden>
     <input type="hidden" name="form-name" value="email-signup" />
     <input type="hidden" name="bot-field" />
     <input type="email" name="email" />
+  </form>
+  <form name="feature-survey" netlify netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="feature-survey" />
+    <input type="hidden" name="bot-field" />
+    <input type="radio" name="feature" value="sales" />
+    <input type="radio" name="feature" value="payment" />
+    <input type="radio" name="feature" value="csr" />
+    <input type="radio" name="feature" value="financing" />
   </form>
 </body>
 

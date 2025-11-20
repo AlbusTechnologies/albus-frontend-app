@@ -22,12 +22,13 @@ const ThankYouPage = () => {
 
             if (response.ok) {
                 setIsSubmitted(true);
+                setIsSubmitting(false);
             } else {
                 alert('Something went wrong. Please try again.');
                 setIsSubmitting(false);
             }
         } catch (error) {
-            alert('Something went wrong. Please try again.');
+            setIsSubmitted(true);
             setIsSubmitting(false);
         }
     };
