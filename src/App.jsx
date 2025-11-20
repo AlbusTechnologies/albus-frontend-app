@@ -38,7 +38,7 @@ const EmailCapture = ({ className = '' }) => {
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      className={`flex w-full max-w-md border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm focus-within:ring-2 focus-within:ring-black transition-all ${className}`}
+      className={`flex flex-col sm:flex-row w-full max-w-md border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm focus-within:ring-2 focus-within:ring-black transition-all ${className}`}
       onSubmit={handleSubmit}
     >
       <input type="hidden" name="form-name" value="email-signup" />
@@ -52,7 +52,7 @@ const EmailCapture = ({ className = '' }) => {
       />
       <button
         type="submit"
-        className="bg-[#D9F827] hover:bg-[#cbeb24] text-black font-medium px-6 py-2 rounded-md transition-colors whitespace-nowrap text-sm flex items-center gap-2"
+        className="bg-[#D9F827] hover:bg-[#cbeb24] text-black font-medium px-4 sm:px-6 py-2 rounded-md transition-colors whitespace-nowrap text-xs sm:text-sm flex items-center justify-center gap-2"
       >
         Get started for free
       </button>
@@ -94,10 +94,10 @@ const FlowAnimation = () => {
     }
   };
 
-  const boxStyle = "bg-white border-2 border-gray-800 rounded-lg p-3 text-center text-sm font-medium shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center h-16 w-32 z-10 relative";
+  const boxStyle = "bg-white border-2 border-gray-800 rounded-lg p-2 sm:p-3 text-center text-xs sm:text-sm font-medium shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center h-12 sm:h-14 md:h-16 w-24 sm:w-28 md:w-32 z-10 relative";
 
   return (
-    <div className="relative w-full h-[400px] flex items-center justify-center font-sans select-none">
+    <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] flex items-center justify-center font-sans select-none overflow-hidden">
       {/* Connecting Lines SVG Layer */}
       <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" viewBox="0 0 672 400" style={{ overflow: 'visible' }}>
         {/* Left Inputs to Center */}
@@ -122,9 +122,9 @@ const FlowAnimation = () => {
       </svg>
 
       {/* Layout Grid */}
-      <div className="flex items-center justify-between w-full max-w-2xl px-4">
+      <div className="flex items-center justify-between w-full max-w-2xl px-2 sm:px-4">
         {/* Inputs Column */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-3 sm:gap-4 md:gap-6">
           <motion.div className={boxStyle} whileHover={{ scale: 1.05 }}>Website bookings</motion.div>
           <motion.div className={boxStyle} whileHover={{ scale: 1.05 }}>Text messages</motion.div>
           <motion.div className={boxStyle} whileHover={{ scale: 1.05 }}>Phone calls</motion.div>
@@ -132,19 +132,19 @@ const FlowAnimation = () => {
         </div>
 
         {/* Central Processor */}
-        <div className="flex items-center justify-center mx-8">
+        <div className="flex items-center justify-center mx-2 sm:mx-4 md:mx-8">
           <motion.div
-            className="bg-white border-2 border-black rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] h-32 w-32 flex flex-col items-center justify-center z-20 relative"
+            className="bg-white border-2 border-black rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] h-20 w-20 sm:h-24 sm:w-24 md:h-32 md:w-32 flex flex-col items-center justify-center z-20 relative"
             animate={{ boxShadow: ["6px 6px 0px 0px rgba(0,0,0,1)", "2px 2px 0px 0px rgba(0,0,0,1)", "6px 6px 0px 0px rgba(0,0,0,1)"] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <Zap className="w-8 h-8 text-[#D9F827] fill-current mb-2" />
-            <span className="font-bold text-xl tracking-tight">Albus</span>
+            <Zap className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-[#D9F827] fill-current mb-1 sm:mb-2" />
+            <span className="font-bold text-base sm:text-lg md:text-xl tracking-tight">Albus</span>
           </motion.div>
         </div>
 
         {/* Outputs Column */}
-        <div className="flex flex-col gap-24">
+        <div className="flex flex-col gap-12 sm:gap-16 md:gap-24">
           <motion.div className={boxStyle} initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1 }}>
             More profit
           </motion.div>
@@ -301,24 +301,24 @@ function LandingPage() {
             <span className="font-semibold text-xl tracking-tight">Albus</span>
           </div>
 
-          <div className="hidden md:block w-[420px]">
+          <div className="hidden md:block w-full max-w-md lg:w-[420px]">
             <EmailCapture size="small" />
           </div>
         </div>
       </header>
 
       {/* 2. Hero Section (Cream Background) */}
-      <section className="bg-[#FFFBF5] pt-20 pb-32 border-b border-gray-200">
+      <section className="bg-[#FFFBF5] pt-12 sm:pt-16 md:pt-20 pb-16 sm:pb-24 md:pb-32 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-16">
 
             {/* Left: Copy */}
-            <div className="lg:w-5/12 flex flex-col gap-8 text-center lg:text-left">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.1]">
+            <div className="lg:w-5/12 flex flex-col gap-6 sm:gap-8 text-center lg:text-left">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.1] px-2">
                 More profit.<br />
                 Less work.
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed px-2">
                 Albus autonomously handles calls, bookings, and payments so you can focus on the work. Put your growth on autopilot.
               </p>
               <div className="w-full">
@@ -336,7 +336,7 @@ function LandingPage() {
       </section>
 
       {/* 3. Value Props Section (Mint Green Background) */}
-      <section className="bg-[#F0FDF4] py-24 border-b border-gray-200">
+      <section className="bg-[#F0FDF4] py-12 sm:py-16 md:py-24 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
             {FEATURES.map((feature) => (
@@ -352,10 +352,10 @@ function LandingPage() {
       </section>
 
       {/* 4. Bottom Signup Area (Light Blue Background) */}
-      <section className="bg-[#F0F9FF] py-32">
+      <section className="bg-[#F0F9FF] py-16 sm:py-24 md:py-32">
         <div className="max-w-3xl mx-auto px-4 text-center flex flex-col items-center gap-8">
-          <h2 className="text-4xl font-bold text-gray-900 tracking-tight">Ready to Automate Your Growth?</h2>
-          <p className="text-lg text-gray-600">Join the leading home services businesses using Albus to scale.</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 tracking-tight px-4">Ready to Automate Your Growth?</h2>
+          <p className="text-base sm:text-lg text-gray-600 px-4">Join the leading home services businesses using Albus to scale.</p>
 
           <div className="w-full max-w-md">
             <div className="bg-white p-2 rounded-xl shadow-lg border border-blue-100">
